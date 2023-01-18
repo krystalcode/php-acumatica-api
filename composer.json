@@ -1,0 +1,21 @@
+{
+    "name": "krystalcode/acumatica-api",
+    "type": "library",
+    "description": "Provides an SDK for integrating with the Acumatica REST APIs.",
+    "keywords": ["Acumatica"],
+    "homepage": "https://github.com/krystalcode/php-acumatica-api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "krystalcode",
+            "homepage": "https://github.com/krystalcode"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/krystalcode/php-acumatica-api/issues",
+        "source": "https://github.com/krystalcode/php-acumatica-api"
+    },
+    "autoload": {
+        "psr-4": { "KrystalCode\\AcumaticaApi\\": "src/" }
+    }
+}
