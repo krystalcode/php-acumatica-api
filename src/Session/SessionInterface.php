@@ -21,6 +21,9 @@ namespace KrystalCode\Acumatica\Api\Session;
  * session object should be created because it is essentially a new session. No
  * setter methods are therefore foreseen by the interface. Implementations
  * should be requiring the values in their constructors.
+ *
+ * @see \KrystalCode\Acumatica\Api\Session\SessionStorageInterface
+ * @see \KrystalCode\Acumatica\Api\Session\SupportsExpirationSessionStorageInterface
  */
 interface SessionInterface
 {
