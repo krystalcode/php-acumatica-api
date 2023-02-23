@@ -20,7 +20,14 @@ namespace KrystalCode\Acumatica\Api\Session;
  * username for applications that may connect with multiple credentials on
  * behalf of different users.
  *
+ * This interface provides methods that should be transparent to the application
+ * when it comes to session expiration i.e. all expired sessions should be
+ * treated by these methods as if they don't exist. If the application needs to
+ * be aware of expired sessions, the storage needs to implement the related
+ * interface.
+ *
  * @see \KrystalCode\Acumatica\Api\Session\SessionInterface
+ * @see \KrystalCode\Acumatica\Api\Session\SupportsExpirationSessionStorageInterface
  */
 interface SessionStorageInterface
 {
@@ -35,27 +42,32 @@ interface SessionStorageInterface
     public function set(SessionInterface $session);
 
     /**
-     * Returns the cookie value for the given session ID.
+     * Returns the session for the given ID.
+     *
+     * `null` should be returned for expired sessions.
      *
      * @param string $id
      *   The session ID.
      *
      * @return \Drupal\acumatica\Session\SessionInterface|null
-     *   The session, or null if there is no session for the given ID.
+     *   The session, or `null` if there is no session for the given ID, or if
+     *   there is a session but it has expired.
      */
     public function get(string $id = self::SESSION_ID_DEFAULT): ?SessionInterface;
 
     /**
      * Returns whether a session with given ID exists.
      *
+     * `false` should be returned for expired sessions.
+     *
      * @param string $id
      *   The session ID.
      *
      * @return bool
-     *   TRUE if the session exists, FALSE otherwise.
+     *   `true` if the session exists, `false` otherwise.
      */
     public function exists(string $id = self::SESSION_ID_DEFAULT): bool;
-    
+
     /**
      * Deletes the session with the given ID.
      *
@@ -69,6 +81,8 @@ interface SessionStorageInterface
 
     /**
      * Returns the number of existing sessions.
+     *
+     * Expired sessions should not be counted.
      *
      * @return int
      *   The number of existing sessions.
