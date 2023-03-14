@@ -15,6 +15,9 @@
         "issues": "https://github.com/krystalcode/php-acumatica-api/issues",
         "source": "https://github.com/krystalcode/php-acumatica-api"
     },
+    "require": {
+        "php": "^8.0"
+    },
     "autoload": {
         "psr-4": { "KrystalCode\\Acumatica\\Api\\": "src/" }
     }
