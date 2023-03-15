@@ -18,7 +18,7 @@
     "require": {
         "php": "^8.0",
         "guzzlehttp/guzzle": "^6.5.8 || ^7.4.5",
-        "krystalcode/php-api-iterator": "dev-master"
+        "krystalcode/api-iterator": "dev-master"
     },
     "autoload": {
         "psr-4": { "KrystalCode\\Acumatica\\Api\\": "src/" }
