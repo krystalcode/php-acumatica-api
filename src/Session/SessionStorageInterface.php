@@ -3,18 +3,18 @@
 namespace KrystalCode\Acumatica\Api\Session;
 
 /**
- * The interface for the Acumatica session storage.
+ * The interface for Acumatica session storage implementations.
  *
- * Acumatica requires maintaining a session cookie and using it in each request
- * for authentication. The session storage provides the methods to store and
- * retrieve the session cookies.
+ * Acumatica requires maintaining a session cookie or an access token and using
+ * it in each request for authentication. The session storage provides the
+ * methods to manage sessions with their cookies/tokens.
  *
  * This library is agnostic to the application that integrates with Acumatica
- * and it therefore does not provide a session storage implementation. It needs
- * to be provided by the application.
+ * and the data stores it uses; it therefore does not provide a session storage
+ * implementation. It needs to be provided by the application.
  *
- * Depending on the data storage used, it may be a good idea to store all
- * session values serialized instead of just the cookie value. We may be adding
+ * Depending on the data store used, it may be a good idea to store all session
+ * values serialized instead of just the cookie/token value. We may be adding
  * more values, such as creation and expiration timestamps, instance or API ID
  * for applications that work with multiple Acumatica instances or APIs, or even
  * username for applications that may connect with multiple credentials on
@@ -23,8 +23,8 @@ namespace KrystalCode\Acumatica\Api\Session;
  * This interface provides methods that should be transparent to the application
  * when it comes to session expiration i.e. all expired sessions should be
  * treated by these methods as if they don't exist. If the application needs to
- * be aware of expired sessions, the storage needs to implement the related
- * interface.
+ * be aware of expired sessions, the session storage needs to implement the
+ * related interface.
  *
  * @see \KrystalCode\Acumatica\Api\Session\SessionInterface
  * @see \KrystalCode\Acumatica\Api\Session\SupportsExpirationSessionStorageInterface
