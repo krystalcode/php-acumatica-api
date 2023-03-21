@@ -39,7 +39,7 @@ interface SessionStorageInterface
      * @param \Drupal\acumatica\Session $session
      *   The session to store.
      */
-    public function set(SessionInterface $session);
+    public function set(SessionInterface $session): void;
 
     /**
      * Returns the session for the given ID.
@@ -77,7 +77,7 @@ interface SessionStorageInterface
      * @param string $id
      *   The session ID.
      */
-    public function delete(string $id = self::SESSION_ID_DEFAULT);
+    public function delete(string $id = self::SESSION_ID_DEFAULT): void;
 
     /**
      * Returns the number of existing sessions.
