@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KrystalCode\Acumatica\Api\Discovery;
 
 use GuzzleHttp\ClientInterface;
+use KrystalCode\Acumatica\Api\Session\SessionManagerInterface;
 
 /**
  * Facilitates discovery of Acumatica API clients.
@@ -24,12 +25,12 @@ class Discovery
      *
      * @param \GuzzleHttp\ClientInterface $client
      *   The Guzzle API client.
-     * @param \KrystalCode\Acumatica\Api\Discovery\Configuration $config
-     *   The configuration.
+     * @param \KrystalCode\Acumatica\Api\Session\SessionManagerInterface $sessionManager
+     *   The session manager.
      */
     public function __construct(
         protected ClientInterface $client,
-        protected Configuration $config
+        protected SessionManagerInterface $sessionManager
     ) {
     }
 
@@ -49,12 +50,15 @@ class Discovery
      */
     public function __call(string $name, mixed $arguments)
     {
-        $class = $this->config->getClientNamespace() . '\\Api\\' . ucfirst($name) . 'Api';
+        $namespace = $this->sessionManager
+            ->getConfiguration()
+            ->getClientNamespace();
+        $class = $namespace . '\\Api\\' . ucfirst($name) . 'Api';
         if (class_exists($class)) {
             return new ClientProxy(
                 new $class(
                     $this->client,
-                    $this->config->toClientConfiguration()
+                    $this->sessionManager->connect()
                 ),
                 $name
             );
